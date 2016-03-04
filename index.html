@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>¿Quién es el futbolista?</title>
+  <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="//cdn.jsdelivr.net/vue/1.0.17/vue.min.js"></script>
+  <script src="//cdn.jsdelivr.net/momentjs/2.11.2/moment.min.js"></script>
+  <style>
+  div#imgcont {
+    position: relative;
+    width:120px;
+    height:150px;
+    background-image: url('futbolistas.jpg');
+    background-repeat: no-repeat;
+    background-position: -130px 0px; 
+    background-size: 1200px 616px;
+  }
+  </style>
+</head>
+<body>
+  <div class="container-fluid" id="app">
+    <section id="header" class="row col-xs-12">
+      <h1>¿Quién es el futbolista?</h1>
+    </section>
+    <section id="resultado" v-if="resultado" class="row col-xs-12">
+      <ul>
+        <li>Aciertos: {{puntos}} de {{ futbolistas.length }}</li>
+        <li>Tiempo: {{tiempo_formato}}</li>
+        <li>Velocidad: {{velocidad}}</li>
+        <li>Resultado: {{resultado}}</li>
+      </ul>
+    </section>
+    <section id="imagen" class="row col-xs-12">
+      
+          <div id="imgcont">?</div>
+
+    </section>
+  </div>
+</body>
+<script src="js/app.js"></script>
+</html>
