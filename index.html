@@ -23,7 +23,7 @@
     <section id="header" class="row col-xs-12">
       <h1>¿Quién es el futbolista?</h1>
     </section>
-    <section id="resultado" v-if="resultado" class="row col-xs-12">
+    <section id="resultado" v-if="resultado != null" class="row col-xs-12">
       <ul>
         <li>Aciertos: {{puntos}} de {{ futbolistas.length }}</li>
         <li>Tiempo: {{tiempo_formato}}</li>

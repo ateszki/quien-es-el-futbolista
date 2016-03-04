@@ -69,7 +69,7 @@ new Vue({
       {'nombre': '', 'posicion': '0px 0px'},
       {'nombre': '', 'posicion': '0px 0px'},
     ],
-    futbolistas_shuffle: null;
+    futbolistas_shuffle: null,
   },
 
   computed: {
