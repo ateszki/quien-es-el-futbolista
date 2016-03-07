@@ -21,7 +21,7 @@
     width:120px;
     height:150px;
     background-image: none;
-    background-color: green;
+    background-color: #aeaeae;
     color: white;
     background-repeat: no-repeat;
     background-position: 0px 0px; 
@@ -31,6 +31,9 @@
     text-align: center;
     line-height: 150px;
     margin: 10px auto;
+    -webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+border-radius: 5px;
   }
   #resultado div {
     width:50%;
@@ -66,27 +69,32 @@ border-radius: 5px;
 </head>
 <body>
   <div class="container-fluid" id="app">
-    <div class="cont row col-xs-12 col-sm-4 col-sm-offset-4 text-center">
+    <div class="cont col-xs-12 col-md-4 col-md-offset-4 text-center">
     <section id="header">
       <h1>¿Quién es el futbolista?</h1>
     </section>
     <section id="resultado">
       <div>
       <ul>
-        <li>Aciertos: {{puntos}} de {{ futbolistas.length+1 }}</li>
+        <li>Aciertos: {{puntos}} de {{ futbolistas.length }}</li>
         <li>Tiempo: {{tiempo}}</li>
         <li>Velocidad: {{velocidad}} <br>(resp. x min.)</li>
-        <li v-if="resultado && !en_juego">Resultado: {{resultado}}</li>
+        <li v-if="terminado"><h1>Resultado: {{resultado}}</h1><h4>(aciertos x velocidad)</li>
       </ul>
       </div>
     </section>
-    <section id="imagen">
+    <section id="imagen" v-if="!terminado">
       <div id="imgcont" v-bind:class="{ 'juego': en_juego }"><span v-if='!en_juego'>?</span></div>
       <button class="btn btn-default" v-if="opciones == null" v-on:click="empezar">Empezar</button>
     </section>
     <section id="botones" v-if="opciones != null">
         <botones :opciones="opciones" ></botones>
     </section>
+    </div>
+    <div class="col-xs-12 col-md-4 col-md-offset-4 text-center">
+      Ilustración: <a href="http://twitter.com/LonchoMambo22">@LonchoMambo22</a><br>
+      Desarrollo: <a href="http://twitter.com/ateszki">@ateszki</a>
+
     </div>
   </div>
 <script src="js/app.js"></script>

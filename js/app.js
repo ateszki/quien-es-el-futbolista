@@ -1,25 +1,31 @@
 Vue.component('botones',{
   props: ['opciones'],
 
-  template: '<div v-for="op in opciones"><button data-indice={{op.indice}} data-correcto={{op.correcto}} v-on:click="respuesta" class="btn btn-default col-xs-8 col-xs-offset-2">{{ op.nombre }}</button></div>',
+  template: '<div v-for="op in opciones"><button data-indice={{op.indice}} data-correcto={{op.correcto}} v-on:click="respuesta" class="btn btn-default col-xs-8 col-xs-offset-2" >{{ op.nombre }}</button></div>',
 
   methods: {
     respuesta: function(event){
       self = this.$parent;
-      if(event.target.dataset.indice > self.futbolistas_shuffle.length){
-        self.terminar();
-      }
-      event.target.classList.remove('btn-info')
-      if(event.target.dataset.correcto==1){
+      
+      if(event.target.dataset.indice==self.indice){
         event.target.classList.add('btn-success');
         self.puntos+=1;
       } else {
         event.target.classList.add('btn-danger');
       }
+      if(event.target.dataset.indice == self.futbolistas_shuffle.length-1){
+        self.terminar();
+        return false;
+      }
+      
+      var bot = event.target;
       window.setTimeout(function(){
+        bot.classList.remove('btn-success')
+        bot.classList.remove('btn-danger')
         self.indice +=1;
+        self.opciones = null;
         self.crear_opciones();
-      },500);
+      },200);
     },
  
   }
@@ -28,6 +34,7 @@ Vue.component('botones',{
 new Vue({
   el: '#app',
   data: {
+    terminado: false,
     segundos:    0,
     puntos:   0,
     futbolistas: [
@@ -84,7 +91,7 @@ new Vue({
       {'nombre': 'Pepe Chatruc', 'posicion': '-240px -442px'},
       {'nombre': 'Bochini', 'posicion': '-320px -442px'},
       {'nombre': 'No sé', 'posicion': '-400px -442px'},
-      {'nombre': 'Angel David Comizzo', 'posicion': '-480px -442px'},
+      {'nombre': 'Comizzo', 'posicion': '-480px -442px'},
       {'nombre': 'Oscar Garré', 'posicion': '-560px -442px'},
       {'nombre': 'Radamel Falcao', 'posicion': '-620px -442px'},
       {'nombre': 'No sé', 'posicion': '-700px -442px'},
@@ -106,14 +113,13 @@ new Vue({
       return moment.utc(this.segundos*1000).format("mm:ss")
     },
     velocidad: function(){
-      
-      var vel =  (this.segundos==0||this.indice==0)?0:this.segundos/this.indice;
+      var vel =  (this.segundos==0||this.indice==0)?0:((this.indice+1)*60)/this.segundos;
       return vel.toFixed(2);
 
     },
     resultado: function(){
-      var res = (this.segundos==0||this.puntos==0)?false:this.puntos*this.velocidad;
-      res.toFixed(2)
+      var res = (this.terminado)?this.puntos*this.velocidad:0;
+      return res.toFixed(2)
     },
     distribution: function(){
       var dist = this.adults;
@@ -152,6 +158,7 @@ new Vue({
       this.en_juego = false;
       this.futbolistas_shuffle = null;
       this.opciones = null;
+      this.terminado = true;
 
     },
 
@@ -181,22 +188,32 @@ new Vue({
     crear_opciones: function(){
         var id = this.indice;
         var futbolista = this.futbolistas_shuffle[id];
-        futbolista.correcto = 1;
+        var ops = [];
+        this.opciones = [];
         futbolista.indice = id;
         imgcont = document.getElementById("imgcont").style.backgroundPosition = futbolista.posicion;
         var o =[];
+        var usados = [];
         o.push(futbolista);
+        usados.push(id)
+        var f = '';
         while (o.length < 3){
-          i = Math.floor((Math.random() * this.futbolistas_shuffle.length) + 1);
-          if(i != id){
-            var f = this.futbolistas_shuffle[i];
-            f.correcto = 0;
+          i = Math.floor((Math.random() * this.futbolistas_shuffle.length) );
+          var usado = false;
+          for(j=0;j<usados.length;j++){
+            if(usados[j] == i){
+              usado = true;
+              break;
+            }
+          }
+          if(!usado){
+            f = this.futbolistas_shuffle[i];
             f.indice = i;
             o.push(f);
+            usados.push(i)
           }
         }
         ops = this.array_shuffle(o);
-        console.log(ops);
         this.opciones = ops;
     },
     
