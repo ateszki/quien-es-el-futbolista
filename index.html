@@ -7,35 +7,87 @@
   <script src="//cdn.jsdelivr.net/vue/1.0.17/vue.min.js"></script>
   <script src="//cdn.jsdelivr.net/momentjs/2.11.2/moment.min.js"></script>
   <style>
-  div#imgcont {
+  div#imgcont.juego {
     position: relative;
     width:120px;
     height:150px;
     background-image: url('futbolistas.jpg');
     background-repeat: no-repeat;
-    background-position: -130px 0px; 
+    background-position: 0px 0px; 
     background-size: 1200px 616px;
+  }
+  div#imgcont {
+    position: relative;
+    width:120px;
+    height:150px;
+    background-image: none;
+    background-color: green;
+    color: white;
+    background-repeat: no-repeat;
+    background-position: 0px 0px; 
+    background-size: 1200px 616px;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;
+    line-height: 150px;
+    margin: 10px auto;
+  }
+  #resultado div {
+    width:50%;
+    margin:0 auto;
+    padding:5px 0;
+    
+  }
+  #resultado div ul {
+    list-style: none;
+    margin:0;
+    padding: 0;
+  }
+  #resultado div ul li{
+    text-align: center;
+    border-bottom: solid 1px white;
+    padding: 5px;
+  }
+  #resultado div ul li:last-child{
+    border-bottom: none;
+  }
+  #app div.cont {
+    background-color: #4382F7;
+    color:#fff;
+    margin-top:10px;
+    -webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+border-radius: 5px;
+  }
+  button {
+    margin-bottom: 5px !important;
   }
   </style>
 </head>
 <body>
   <div class="container-fluid" id="app">
-    <section id="header" class="row col-xs-12">
+    <div class="cont row col-xs-12 col-sm-4 col-sm-offset-4 text-center">
+    <section id="header">
       <h1>¿Quién es el futbolista?</h1>
     </section>
-    <section id="resultado" v-if="resultado != null" class="row col-xs-12">
+    <section id="resultado">
+      <div>
       <ul>
-        <li>Aciertos: {{puntos}} de {{ futbolistas.length }}</li>
-        <li>Tiempo: {{tiempo_formato}}</li>
-        <li>Velocidad: {{velocidad}}</li>
-        <li>Resultado: {{resultado}}</li>
+        <li>Aciertos: {{puntos}} de {{ futbolistas.length+1 }}</li>
+        <li>Tiempo: {{tiempo}}</li>
+        <li>Velocidad: {{velocidad}} <br>(resp. x min.)</li>
+        <li v-if="resultado && !en_juego">Resultado: {{resultado}}</li>
       </ul>
+      </div>
     </section>
-    <section id="imagen" class="row col-xs-12">
-      
-          <div id="imgcont">?</div>
-
+    <section id="imagen">
+      <div id="imgcont" v-bind:class="{ 'juego': en_juego }"><span v-if='!en_juego'>?</span></div>
+      <button class="btn btn-default" v-if="opciones == null" v-on:click="empezar">Empezar</button>
     </section>
+    <section id="botones" v-if="opciones != null">
+        <botones :opciones="opciones" ></botones>
+    </section>
+    </div>
   </div>
 <script src="js/app.js"></script>
 </body>
