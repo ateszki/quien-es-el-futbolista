@@ -1,0 +1,58 @@
+div#imgcont.juego {
+    position: relative;
+    width:120px;
+    height:150px;
+    background-image: url('futbolistas.jpg');
+    background-repeat: no-repeat;
+    background-position: 0px 0px; 
+    background-size: 1200px 616px;
+  }
+  div#imgcont {
+    position: relative;
+    width:120px;
+    height:150px;
+    background-image: none;
+    background-color: #aeaeae;
+    color: white;
+    background-repeat: no-repeat;
+    background-position: 0px 0px; 
+    background-size: 1200px 616px;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;
+    line-height: 150px;
+    margin: 10px auto;
+    -webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+border-radius: 5px;
+  }
+  #resultado div {
+    width:50%;
+    margin:0 auto;
+    padding:5px 0;
+    
+  }
+  #resultado div ul {
+    list-style: none;
+    margin:0;
+    padding: 0;
+  }
+  #resultado div ul li{
+    text-align: center;
+    border-bottom: solid 1px white;
+    padding: 5px;
+  }
+  #resultado div ul li:last-child{
+    border-bottom: none;
+  }
+  #app div.cont {
+    background-color: #4382F7;
+    color:#fff;
+    margin-top:10px;
+    -webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+border-radius: 5px;
+  }
+  button {
+    margin-bottom: 5px !important;
+  }
