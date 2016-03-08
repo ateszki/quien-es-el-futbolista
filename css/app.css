@@ -2,7 +2,7 @@ div#imgcont.juego {
     position: relative;
     width:120px;
     height:150px;
-    background-image: url('futbolistas.jpg');
+    background-image: url('../futbolistas.jpg');
     background-repeat: no-repeat;
     background-position: 0px 0px; 
     background-size: 1200px 616px;

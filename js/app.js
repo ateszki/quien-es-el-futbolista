@@ -168,18 +168,18 @@ new Vue({
 
     },
     array_shuffle: function(a){
-      let counter = a.length;
+      var counter = a.length;
 
       // While there are elements in the array
       while (counter > 0) {
           // Pick a random index
-          let index = Math.floor(Math.random() * counter);
+          var index = Math.floor(Math.random() * counter);
 
           // Decrease counter by 1
           counter--;
 
           // And swap the last element with it
-          let temp = a[counter];
+          var temp = a[counter];
           a[counter] = a[index];
           a[index] = temp;
       }
