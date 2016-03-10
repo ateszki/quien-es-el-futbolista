@@ -44,7 +44,7 @@ new Vue({
       {'nombre': 'Ronaldo', 'posicion': '-210px 0px'},
       {'nombre': 'Andrés Iniesta', 'posicion': '-280px 0px'},
       {'nombre': 'Medina Bello', 'posicion': '-340px 0px'},
-      {'nombre': 'No sé', 'posicion': '-410px 0px'},
+      {'nombre': 'Rivelino', 'posicion': '-410px 0px'},
       {'nombre': 'Ruben paz', 'posicion': '-480px 0px'},
       {'nombre': 'Jorge Comas', 'posicion': '-550px 0px'},
       {'nombre': 'Beto Acosta', 'posicion': '-620px 0px'},
